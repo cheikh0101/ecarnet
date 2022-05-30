@@ -1,0 +1,73 @@
+models:
+  Groupe :
+    name : string nullable
+    code : string nullable unique
+
+  GroupeUser:
+    user_id : id foreign
+    groupe_id : id foreign
+
+  Dossier :
+    numero : string
+    datenaissance : string nullable
+    cni : string
+    antecedent_medicaux : text nullable
+    antecedent_chirugicaux : text nullable
+    antecedent_familiaux : text nullable
+    enabled : boolean
+
+  Rendezvous :
+    date : string
+    presence : string nullable
+    description : string nullable
+    dossier_id : id foreign
+
+  Consultation:
+    type_id : id foreign
+    document_id : id foreign
+    user_email : string
+
+  Pathologie :
+    dossier_id : id foreign
+    symptomes : text
+    medicament_prescrits : text nullable
+    historique_maladie : text nullable
+    tension_arterielle : text nullable
+    temperature : text nullable
+    pouls : text nullable
+    frequence_respiratoire : text nullable
+
+  Medicament :
+    nom : string
+    quantite_stock : string nullable
+
+  MedicamentRemis :
+    consultation_id : id foreign
+    medicament_id : id foreign
+    quantite : integer
+
+  PathologieConsultation :
+    pathologie_id : id foreign
+    consultation_id : id foreign
+
+controllers:
+  User :
+    resource
+
+  Groupe :
+    resource
+
+  Dossier :
+    resource
+
+  Rendezvous :
+    resource
+
+  Consultation :
+    resource
+
+  Pathologie :
+    resource
+
+  Medicament :
+    resource

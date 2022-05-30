@@ -1,0 +1,97 @@
+created:
+    - app/Http/Controllers/UserController.php
+    - app/Http/Controllers/GroupeController.php
+    - app/Http/Controllers/DossierController.php
+    - app/Http/Controllers/RendezvousController.php
+    - app/Http/Controllers/ConsultationController.php
+    - app/Http/Controllers/PathologieController.php
+    - app/Http/Controllers/MedicamentController.php
+    - database/factories/GroupeFactory.php
+    - database/factories/GroupeUserFactory.php
+    - database/factories/DossierFactory.php
+    - database/factories/RendezvousFactory.php
+    - database/factories/ConsultationFactory.php
+    - database/factories/PathologieFactory.php
+    - database/factories/MedicamentFactory.php
+    - database/factories/MedicamentRemisFactory.php
+    - database/factories/PathologieConsultationFactory.php
+    - database/migrations/2022_05_24_230918_create_groupes_table.php
+    - database/migrations/2022_05_24_230919_create_groupe_users_table.php
+    - database/migrations/2022_05_24_230920_create_dossiers_table.php
+    - database/migrations/2022_05_24_230921_create_rendezvouses_table.php
+    - database/migrations/2022_05_24_230922_create_consultations_table.php
+    - database/migrations/2022_05_24_230923_create_pathologies_table.php
+    - database/migrations/2022_05_24_230924_create_medicaments_table.php
+    - database/migrations/2022_05_24_230925_create_medicament_remis_table.php
+    - database/migrations/2022_05_24_230926_create_pathologie_consultations_table.php
+    - app/Models/Groupe.php
+    - app/Models/GroupeUser.php
+    - app/Models/Dossier.php
+    - app/Models/Rendezvous.php
+    - app/Models/Consultation.php
+    - app/Models/Pathologie.php
+    - app/Models/Medicament.php
+    - app/Models/MedicamentRemis.php
+    - app/Models/PathologieConsultation.php
+    - tests/Feature/Http/Controllers/UserControllerTest.php
+    - tests/Feature/Http/Controllers/GroupeControllerTest.php
+    - tests/Feature/Http/Controllers/DossierControllerTest.php
+    - tests/Feature/Http/Controllers/RendezvousControllerTest.php
+    - tests/Feature/Http/Controllers/ConsultationControllerTest.php
+    - tests/Feature/Http/Controllers/PathologieControllerTest.php
+    - tests/Feature/Http/Controllers/MedicamentControllerTest.php
+    - app/Http/Requests/UserStoreRequest.php
+    - app/Http/Requests/UserUpdateRequest.php
+    - app/Http/Requests/GroupeStoreRequest.php
+    - app/Http/Requests/GroupeUpdateRequest.php
+    - app/Http/Requests/DossierStoreRequest.php
+    - app/Http/Requests/DossierUpdateRequest.php
+    - app/Http/Requests/RendezvouStoreRequest.php
+    - app/Http/Requests/RendezvouUpdateRequest.php
+    - app/Http/Requests/ConsultationStoreRequest.php
+    - app/Http/Requests/ConsultationUpdateRequest.php
+    - app/Http/Requests/PathologieStoreRequest.php
+    - app/Http/Requests/PathologieUpdateRequest.php
+    - app/Http/Requests/MedicamentStoreRequest.php
+    - app/Http/Requests/MedicamentUpdateRequest.php
+    - resources/views/user/index.blade.php
+    - resources/views/user/create.blade.php
+    - resources/views/user/show.blade.php
+    - resources/views/user/edit.blade.php
+    - resources/views/groupe/index.blade.php
+    - resources/views/groupe/create.blade.php
+    - resources/views/groupe/show.blade.php
+    - resources/views/groupe/edit.blade.php
+    - resources/views/dossier/index.blade.php
+    - resources/views/dossier/create.blade.php
+    - resources/views/dossier/show.blade.php
+    - resources/views/dossier/edit.blade.php
+    - resources/views/rendezvou/index.blade.php
+    - resources/views/rendezvou/create.blade.php
+    - resources/views/rendezvou/show.blade.php
+    - resources/views/rendezvou/edit.blade.php
+    - resources/views/consultation/index.blade.php
+    - resources/views/consultation/create.blade.php
+    - resources/views/consultation/show.blade.php
+    - resources/views/consultation/edit.blade.php
+    - resources/views/pathologie/index.blade.php
+    - resources/views/pathologie/create.blade.php
+    - resources/views/pathologie/show.blade.php
+    - resources/views/pathologie/edit.blade.php
+    - resources/views/medicament/index.blade.php
+    - resources/views/medicament/create.blade.php
+    - resources/views/medicament/show.blade.php
+    - resources/views/medicament/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    User: { first_name: string, last_name: string, telephone: string, matricule: string, genre: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
+    Groupe: { name: 'string nullable', code: 'string nullable unique' }
+    GroupeUser: { user_id: 'id foreign', groupe_id: 'id foreign' }
+    Dossier: { numero: string, datenaissance: 'string nullable', cni: string, antecedent_medicaux: 'text nullable', antecedent_chirugicaux: 'text nullable', antecedent_familiaux: 'text nullable', enabled: boolean }
+    Rendezvous: { date: string, presence: 'string nullable', description: 'string nullable', dossier_id: 'id foreign' }
+    Consultation: { type_id: 'id foreign', document_id: 'id foreign', user_email: string }
+    Pathologie: { dossier_id: 'id foreign', symptomes: text, medicament_prescrits: 'text nullable', historique_maladie: 'text nullable', tension_arterielle: 'text nullable', temperature: 'text nullable', pouls: 'text nullable', frequence_respiratoire: 'text nullable' }
+    Medicament: { nom: string, quantite_stock: 'string nullable' }
+    MedicamentRemis: { consultation_id: 'id foreign', medicament_id: 'id foreign', quantite: integer }
+    PathologieConsultation: { pathologie_id: 'id foreign', consultation_id: 'id foreign' }
