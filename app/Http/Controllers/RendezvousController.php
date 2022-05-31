@@ -51,7 +51,7 @@ class RendezvousController extends Controller
      * @param \App\Models\Rendezvous $rendezvou
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Rendezvou $rendezvou)
+    public function show(Request $request, Rendezvous $rendezvou)
     {
         return view('rendezvou.show', compact('rendezvou'));
     }
@@ -61,7 +61,7 @@ class RendezvousController extends Controller
      * @param \App\Models\Rendezvous $rendezvou
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Rendezvou $rendezvou)
+    public function edit(Request $request, Rendezvous $rendezvou)
     {
         return view('rendezvou.edit', compact('rendezvou'));
     }

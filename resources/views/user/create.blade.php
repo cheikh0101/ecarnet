@@ -24,7 +24,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Email</label>
-                                        <input type="email" name="" id="" class="form-control"
+                                        <input type="email" name="email" id="" class="form-control"
                                             placeholder="macky@gmail.com" aria-describedby="helpId">
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Téléphone</label>
-                                        <input type="number" min="8" name="" id="" class="form-control"
+                                        <input type="number" min="8" name="telephone" id="" class="form-control"
                                             placeholder="77 111 98 77" aria-describedby="helpId">
                                     </div>
                                 </div>

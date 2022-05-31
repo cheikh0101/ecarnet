@@ -29,7 +29,7 @@
                     <div class="card-header text-center">Nombre de rendez-vous</div>
                     <div class="card-body">
                         <p class="card-text text-center fs-1">
-                            100
+                            {{ count($rendezVous) }}
                         </p>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         <div class="card-header text-center">Consultation journalière</div>
                         <div class="card-body">
                             <p class="card-text text-center fs-1">
-                                100
+                                {{ count($consultationsJournalieres) }}
                             </p>
                         </div>
                     </div>

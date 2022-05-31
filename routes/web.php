@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Requests\UserStoreRequest;
+use App\Models\Consultation;
+use App\Models\Rendezvous;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +24,12 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+
+    $rendezVous = Rendezvous::all();
+
+    $consultationsJournalieres = Consultation::where('created_at', date('d'))->get();
+
+    return view('dashboard', compact('rendezVous', 'consultationsJournalieres'));
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
@@ -26,7 +37,7 @@ require __DIR__ . '/auth.php';
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard', 'as' =>
 'dashboard.'], function () {
-    Route::resource('user', App\Http\Controllers\UserController::class);
+    Route::resource('user', UserController::class);
 
     Route::resource('groupe', App\Http\Controllers\GroupeController::class);
 
@@ -40,6 +51,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard', 'as' =>
 
     Route::resource('medicament', App\Http\Controllers\MedicamentController::class);
 });
+
+Route::get('user', [UserController::class, 'index'])->name('user');
 
 Route::fallback(function () {
     return view('welcome');

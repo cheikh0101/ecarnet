@@ -24,7 +24,7 @@ class CreateDossiersTable extends Migration
             $table->text('antecedent_chirugicaux')->nullable();
             $table->text('antecedent_familiaux')->nullable();
             $table->foreignId('user_id')->constrained();
-            $table->boolean('enabled');
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
 

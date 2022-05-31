@@ -15,10 +15,7 @@
                 <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Recherche">
             </div>
             <div class="col d-flex justify-content-end">
-                <a href=" {{ route('dashboard.rendezvous.create') }} " class="btn btn-primary">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    Ajouter un rendez-vous
-                </a>
+
             </div>
         </div>
 

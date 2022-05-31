@@ -1,7 +1,5 @@
-{{--
-    @extends('layouts.app')
+@extends('layouts.app')
 
-    @section('content')
-        dossier.create template
-    @endsection
---}}
+@section('content')
+    dossier.create template
+@endsection

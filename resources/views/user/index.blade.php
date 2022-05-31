@@ -66,11 +66,11 @@
                                     </td>
 
                                     <td>
-                                        {{ $user->telephone }}
+                                        {{ $user->matricule }}
                                     </td>
 
                                     <td>
-                                        {{ $user->matricule }}
+                                        {{ $user->telephone }}
                                     </td>
 
                                     <td>
