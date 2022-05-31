@@ -15,8 +15,8 @@ return [
 
     'reset' => 'Votre mot de passe a été modifié!',
     'sent' => 'Nous vous avons envoyé par mail le lien permettant de changer votre mot de passe!',
-    'throttled' => 'Please wait before retrying.',
+    'throttled' => 'Veuillez patienter avant de réessayer.',
     'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that email address.",
+    'user' => "Désolé! Nous ne trouvons pas un utilisateur possèdant cet email.",
 
 ];
