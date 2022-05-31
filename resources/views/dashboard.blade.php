@@ -18,7 +18,7 @@
                     <div class="card-header text-center">Nombre Patient</div>
                     <div class="card-body">
                         <p class="card-text text-center fs-1">
-                            100
+                            {{ count($patients) }}
                         </p>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="card-header text-center">Patient Homme</div>
                     <div class="card-body">
                         <p class="card-text text-center fs-1">
-                            100
+                            xxx
                         </p>
                     </div>
                 </div>
@@ -50,17 +50,17 @@
                         <div class="card-header text-center">Patient Femme</div>
                         <div class="card-body">
                             <p class="card-text text-center fs-1">
-                                100
+                                xxx
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card text-success border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-header text-center">Consultation journalière</div>
+                        <div class="card-header text-center">Consultations</div>
                         <div class="card-body">
                             <p class="card-text text-center fs-1">
-                                {{ count($consultationsJournalieres) }}
+                                {{ count($consultations) }}
                             </p>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <div class="card-header text-center">Cas d'urgence</div>
                         <div class="card-body">
                             <p class="card-text text-center fs-1">
-                                100
+                                xxx
                             </p>
                         </div>
                     </div>

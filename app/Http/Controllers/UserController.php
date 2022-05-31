@@ -19,7 +19,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::all();
+        $patientGroupe = Groupe::where('code', 'pat')->first();
+
+        //tous les patients
+        $users = GroupeUser::where('groupe_id', $patientGroupe->id)->get();
 
         return view('user.index', compact('users'));
     }

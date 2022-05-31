@@ -3,6 +3,8 @@
 use App\Http\Controllers\UserController;
 use App\Http\Requests\UserStoreRequest;
 use App\Models\Consultation;
+use App\Models\Groupe;
+use App\Models\GroupeUser;
 use App\Models\Rendezvous;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,11 +27,17 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
 
+    //tous les rv
     $rendezVous = Rendezvous::all();
 
-    $consultationsJournalieres = Consultation::where('created_at', date('d'))->get();
+    $patientGroupe = Groupe::where('code', 'pat')->first();
 
-    return view('dashboard', compact('rendezVous', 'consultationsJournalieres'));
+    //tous les patients
+    $patients = GroupeUser::where('groupe_id', $patientGroupe->id)->get();
+
+    $consultations = Consultation::all();
+
+    return view('dashboard', compact('rendezVous', 'consultations', 'patients'));
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

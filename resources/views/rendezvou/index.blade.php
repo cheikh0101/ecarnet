@@ -15,7 +15,6 @@
                 <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Recherche">
             </div>
             <div class="col d-flex justify-content-end">
-
             </div>
         </div>
 
