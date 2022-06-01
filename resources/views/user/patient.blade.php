@@ -5,7 +5,7 @@
         <div class="row mt-5">
             <div class="col">
                 <h3>
-                    Liste des rendez-vous
+                    Liste des patients
                 </h3>
             </div>
         </div>
@@ -15,9 +15,9 @@
                 <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Recherche">
             </div>
             <div class="col d-flex justify-content-end">
-                <a href=" {{ route('dashboard.rendezvous.create') }} " class="btn btn-primary">
+                <a href=" {{ route('dashboard.user.create') }} " class="btn btn-primary">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    Nouveau rendez-vous
+                    Ajouter un patient
                 </a>
             </div>
         </div>
@@ -33,22 +33,18 @@
                                 </th>
 
                                 <th>
-                                    Date
+                                    Prénom et Nom
                                 </th>
 
                                 <th>
-                                    Heure
+                                    Matricule
                                 </th>
 
                                 <th>
-                                    Docteur
+                                    Téléphone
                                 </th>
 
-                                <th>
-                                    Description
-                                </th>
-
-                                <th colspan="2" class="text-center">
+                                <th colspan="3" class="text-center">
                                     Actions
                                 </th>
                             </tr>
@@ -59,37 +55,40 @@
                                 {{ $id = 1 }}
                             </div>
 
-                            @forelse ($rendezvous as $rendezvou)
+                            @forelse ($patients as $user)
                                 <tr>
                                     <th>
                                         {{ $id++ }}
                                     </th>
 
                                     <td>
-                                        {{ $rendezvou->date }}
+                                        {{ $user->name }}
                                     </td>
 
                                     <td>
-                                        {{ $rendezvou->time }}
+                                        {{ $user->matricule }}
                                     </td>
 
                                     <td>
-                                        {{ $rendezvou->docteur }}
+                                        {{ $user->telephone }}
                                     </td>
 
                                     <td>
-                                        {{ $rendezvou->description }}
+                                        <a href=" {{ route('dashboard.user.show', compact('user')) }} "
+                                            class="btn btn-outline-primary">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
                                     </td>
 
                                     <td>
-                                        <a href=" {{ route('dashboard.rendezvous.edit', compact('rendezvou')) }} "
+                                        <a href=" {{ route('dashboard.user.edit', compact('user')) }} "
                                             class="btn btn-outline-warning">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
                                     </td>
 
                                     <td>
-                                        <form action=" {{ route('dashboard.rendezvous.destroy', compact('rendezvou')) }} "
+                                        <form action=" {{ route('dashboard.user.destroy', compact('user')) }} "
                                             method="post">
                                             @csrf
                                             @method('delete')
@@ -101,7 +100,7 @@
                                 </tr>
                             @empty
                                 <p>
-                                    Aucun rendez-vous trouvé
+                                    Aucun patient trouvé
                                 </p>
                             @endforelse
 
@@ -114,22 +113,18 @@
                                 </th>
 
                                 <th>
-                                    Date
+                                    Prénom et Nom
                                 </th>
 
                                 <th>
-                                    Heure
+                                    Matricule
                                 </th>
 
                                 <th>
-                                    Docteur
+                                    Téléphone
                                 </th>
 
-                                <th>
-                                    Description
-                                </th>
-
-                                <th colspan="2" class="text-center">
+                                <th colspan="3" class="text-center">
                                     Actions
                                 </th>
                             </tr>

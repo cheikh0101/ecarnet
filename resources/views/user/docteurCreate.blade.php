@@ -7,53 +7,42 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        Nouveau Rendez-vous
+                        Nouveau Docteur
                     </div>
                     <div class="card-body">
-                        <form action=" {{ route('dashboard.rendezvous.store') }} " method="post">
+                        <form action=" {{ route('docteurStore') }} " method="post">
                             @csrf
                             <div class="row mt-5">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="">Date</label>
-                                        <input type="date" name="date" id="" class="form-control"
+                                        <label for="">Prénom et nom</label>
+                                        <input type="text" name="name" id="" class="form-control" placeholder="Macky Sall"
                                             aria-describedby="helpId">
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="">Heure</label>
-                                        <input type="time" name="time" id="" class="form-control"
-                                            aria-describedby="helpId">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="">Patient</label>
-                                        <select class="form-control" name="user_id" id="">
-                                            @foreach ($patients as $user)
-                                                <option value=" {{ $user->id }} "> {{ $user->name }} </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="">Docteur</label>
-                                        <select class="form-control" name="docteur" id="">
-                                            @foreach ($docteurs as $user)
-                                                <option value=" {{ $user->name }} "> {{ $user->name }} </option>
-                                            @endforeach
-                                        </select>
+                                        <label for="">Email</label>
+                                        <input type="email" name="email" id="" class="form-control"
+                                            placeholder="macky@gmail.com" aria-describedby="helpId">
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="">Téléphone</label>
+                                        <input type="number" min="8" name="telephone" id="" class="form-control"
+                                            placeholder="77 111 98 77" aria-describedby="helpId">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="">Description</label>
-                                        <textarea class="form-control" name="description" id="" rows="3"></textarea>
+                                        <label for="">Genre</label>
+                                        <select class="form-control" name="genre" id="">
+                                            <option value="M">Masculin</option>
+                                            <option value="F">Féminin</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

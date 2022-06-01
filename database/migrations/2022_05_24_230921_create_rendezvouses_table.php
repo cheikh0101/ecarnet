@@ -18,9 +18,11 @@ class CreateRendezvousesTable extends Migration
         Schema::create('rendezvouses', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->string('presence')->nullable();
+            $table->time('time');
             $table->text('description')->nullable();
-            $table->foreignId('dossier_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->string('created_by');
+            $table->string('docteur');
             $table->timestamps();
         });
 

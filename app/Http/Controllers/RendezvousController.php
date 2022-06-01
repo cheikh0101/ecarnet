@@ -8,6 +8,7 @@ use App\Http\Requests\RendezvousUpdateRequest;
 use App\Models\Rendezvous;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RendezvousController extends Controller
 {
@@ -17,7 +18,7 @@ class RendezvousController extends Controller
      */
     public function index(Request $request)
     {
-        $rendezvous = Rendezvous::all();
+        $rendezvous = Rendezvous::latest()->get();
 
         return view('rendezvou.index', compact('rendezvous'));
     }
@@ -28,22 +29,33 @@ class RendezvousController extends Controller
      */
     public function create(Request $request)
     {
-        $users = User::all();
-        return view('rendezvou.create', compact('users'));
+        $patients = User::where('is_patient', true)->get();
+        $docteurs = User::where('is_docteur', true)->get();
+        return view('rendezvou.create', compact('patients', 'docteurs'));
     }
 
     /**
      * @param \App\Http\Requests\RendezvousStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RendezvouStoreRequest $request)
+    public function store(Request $request)
     {
-        return 'hello';
-        $rendezvou = Rendezvous::create($request->validated());
+        $request->validate([
+            'date' => ['required'],
+            'time' => ['required'],
+            'docteur' => 'required',
+            'user_id' => 'required'
+        ]);
+        $rv = new Rendezvous();
+        $rv->date = $request->date;
+        $rv->time = $request->time;
+        $rv->description = $request->description;
+        $rv->docteur = $request->docteur;
+        $rv->user_id = $request->user_id;
+        $rv->created_by = auth()->user()->email;
+        $rv->save();
 
-        $request->session()->flash('rendezvou.id', $rendezvou->id);
-
-        return redirect()->route('rendezvou.index');
+        return redirect()->route('dashboard.rendezvous.index');
     }
 
     /**
@@ -85,10 +97,10 @@ class RendezvousController extends Controller
      * @param \App\Models\Rendezvous $rendezvou
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Rendezvou $rendezvou)
+    public function destroy(Request $request, Rendezvous $rendezvou)
     {
         $rendezvou->delete();
 
-        return redirect()->route('rendezvou.index');
+        return redirect()->route('dashboard.rendezvous.index');
     }
 }

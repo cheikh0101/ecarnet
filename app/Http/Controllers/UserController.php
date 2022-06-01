@@ -19,10 +19,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $patientGroupe = Groupe::where('code', 'pat')->first();
-
-        //tous les patients
-        $users = GroupeUser::where('groupe_id', $patientGroupe->id)->get();
+        $users = User::all();
 
         return view('user.index', compact('users'));
     }
@@ -49,24 +46,17 @@ class UserController extends Controller
             'genre' => 'required'
         ]);
         $newPassword = 'aaaaaaaa';
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'telephone' => $request->telephone,
-            'genre' => $request->genre,
-            'matricule' => uniqid(),
-            'password' => Hash::make($newPassword),
-        ]);
-
-        $groupeUser = new GroupeUser();
-        $groupeUser->user_id = $user->id;
-        $groupe = Groupe::where('code', 'pat')->first();
-        $groupeUser->groupe_id = $groupe->id;
-        $groupeUser->save();
-
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->genre = $request->genre;
+        $user->telephone = $request->telephone;
+        $user->matricule = uniqid();
+        $user->password = Hash::make($newPassword);
+        $user->is_patient = true;
+        $user->save();
         $request->session()->flash('user.id', $user->id);
-
-        return redirect()->route('dashboard.user.index');
+        return redirect()->route('patients');
     }
 
     /**
@@ -116,8 +106,11 @@ class UserController extends Controller
      */
     public function destroy(Request $request, User $user)
     {
-        $user->delete();
-
-        return redirect()->route('user.index');
+        try {
+            $user->delete();
+            return redirect()->route('user.index');
+        } catch (\Throwable $th) {
+            return redirect()->route('patients');
+        }
     }
 }

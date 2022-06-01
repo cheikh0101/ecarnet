@@ -5,7 +5,7 @@
         <div class="row mt-5">
             <div class="col">
                 <h3>
-                    Liste des rendez-vous
+                    Liste des Docteurs
                 </h3>
             </div>
         </div>
@@ -15,9 +15,9 @@
                 <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Recherche">
             </div>
             <div class="col d-flex justify-content-end">
-                <a href=" {{ route('dashboard.rendezvous.create') }} " class="btn btn-primary">
+                <a href=" {{ route('docteurCreate') }} " class="btn btn-primary">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    Nouveau rendez-vous
+                    Ajouter un docteur
                 </a>
             </div>
         </div>
@@ -33,19 +33,23 @@
                                 </th>
 
                                 <th>
-                                    Date
+                                    Prénom et Nom
                                 </th>
 
                                 <th>
-                                    Heure
+                                    Email
                                 </th>
 
                                 <th>
-                                    Docteur
+                                    Matricule
                                 </th>
 
                                 <th>
-                                    Description
+                                    Téléphone
+                                </th>
+
+                                <th>
+                                    Genre
                                 </th>
 
                                 <th colspan="2" class="text-center">
@@ -59,41 +63,43 @@
                                 {{ $id = 1 }}
                             </div>
 
-                            @forelse ($rendezvous as $rendezvou)
+                            @forelse ($docteurs as $user)
                                 <tr>
                                     <th>
                                         {{ $id++ }}
                                     </th>
 
                                     <td>
-                                        {{ $rendezvou->date }}
+                                        {{ $user->name }}
                                     </td>
 
                                     <td>
-                                        {{ $rendezvou->time }}
+                                        {{ $user->email }}
                                     </td>
 
                                     <td>
-                                        {{ $rendezvou->docteur }}
+                                        {{ $user->matricule }}
                                     </td>
 
                                     <td>
-                                        {{ $rendezvou->description }}
+                                        {{ $user->telephone }}
                                     </td>
 
                                     <td>
-                                        <a href=" {{ route('dashboard.rendezvous.edit', compact('rendezvou')) }} "
-                                            class="btn btn-outline-warning">
+                                        {{ $user->genre }}
+                                    </td>
+
+                                    <td>
+                                        <a class="btn btn-outline-warning">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
                                     </td>
 
                                     <td>
-                                        <form action=" {{ route('dashboard.rendezvous.destroy', compact('rendezvou')) }} "
-                                            method="post">
+                                        <form action=" {{ route('docteurDestroy', compact('user')) }} " method="post">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-outline-danger">
+                                            <button type="submi" class="btn btn-outline-danger">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </form>
@@ -101,7 +107,7 @@
                                 </tr>
                             @empty
                                 <p>
-                                    Aucun rendez-vous trouvé
+                                    Aucun Membre trouvé
                                 </p>
                             @endforelse
 
@@ -114,19 +120,23 @@
                                 </th>
 
                                 <th>
-                                    Date
+                                    Prénom et Nom
                                 </th>
 
                                 <th>
-                                    Heure
+                                    Email
                                 </th>
 
                                 <th>
-                                    Docteur
+                                    Matricule
                                 </th>
 
                                 <th>
-                                    Description
+                                    Téléphone
+                                </th>
+
+                                <th>
+                                    Genre
                                 </th>
 
                                 <th colspan="2" class="text-center">

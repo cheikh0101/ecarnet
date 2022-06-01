@@ -17,7 +17,7 @@ class CreateConsultationsTable extends Migration
 
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dossier_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->text('symptomes');
             $table->text('medicament_prescrits')->nullable();
             $table->text('historique_maladie')->nullable();

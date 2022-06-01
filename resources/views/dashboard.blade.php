@@ -13,18 +13,20 @@
     <div style="height: 100px"></div>
     <div class="container">
         <div class="row mt-5">
-            <div class="col">
+            <div class="col d-flex d-flex justify-content-center">
                 <div class="card text-success border-success mb-3" style="max-width: 18rem;">
                     <div class="card-header text-center">Nombre Patient</div>
                     <div class="card-body">
                         <p class="card-text text-center fs-1">
-                            {{ count($patients) }}
+                            @if ($patients)
+                                {{ count($patients) }}
+                            @endif
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col d-flex justify-content-center">
                 <div class="card text-success border-success mb-3" style="max-width: 18rem;">
                     <div class="card-header text-center">Nombre de rendez-vous</div>
                     <div class="card-body">
@@ -34,48 +36,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card text-success border-success mb-3" style="max-width: 18rem;">
-                    <div class="card-header text-center">Patient Homme</div>
-                    <div class="card-body">
-                        <p class="card-text text-center fs-1">
-                            xxx
-                        </p>
+
+            <div class="row mt-5">
+                <div class="col d-flex justify-content-center">
+                    <div class="card text-success border-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-center">Patient Homme</div>
+                        <div class="card-body">
+                            <p class="card-text text-center fs-1">
+                                {{ count($patientHomme) }}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col">
+                <div class="col d-flex justify-content-center">
                     <div class="card text-success border-success mb-3" style="max-width: 18rem;">
                         <div class="card-header text-center">Patient Femme</div>
                         <div class="card-body">
                             <p class="card-text text-center fs-1">
-                                xxx
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-success border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-header text-center">Consultations</div>
-                        <div class="card-body">
-                            <p class="card-text text-center fs-1">
-                                {{ count($consultations) }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-success border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-header text-center">Cas d'urgence</div>
-                        <div class="card-body">
-                            <p class="card-text text-center fs-1">
-                                xxx
+                                {{ count($patientFemme) }}
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     @endsection

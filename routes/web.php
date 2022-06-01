@@ -8,6 +8,7 @@ use App\Models\GroupeUser;
 use App\Models\Rendezvous;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,17 +28,17 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
 
-    //tous les rv
     $rendezVous = Rendezvous::all();
 
-    $patientGroupe = Groupe::where('code', 'pat')->first();
+    //return count($rendezVous);
 
-    //tous les patients
-    $patients = GroupeUser::where('groupe_id', $patientGroupe->id)->get();
+    $patients = User::where('is_patient', true)->get();
 
-    $consultations = Consultation::all();
+    $patientHomme = User::where('is_patient', true)->where('genre', 'M')->get();
 
-    return view('dashboard', compact('rendezVous', 'consultations', 'patients'));
+    $patientFemme = User::where('is_patient', true)->where('genre', 'F')->get();
+
+    return view('dashboard', compact('rendezVous', 'patients', 'patientHomme', 'patientFemme'));
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
@@ -60,7 +61,48 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard', 'as' =>
     Route::resource('medicament', App\Http\Controllers\MedicamentController::class);
 });
 
-Route::get('user', [UserController::class, 'index'])->name('user');
+Route::get('dashboard/patient', function () {
+    $patients = User::where('is_patient', true)->latest()->get();
+    return view('user.patient', compact('patients'));
+})->name('patients');
+
+Route::get('dashboard/docteur', function () {
+    $docteurs = User::where('is_docteur', true)->latest()->get();
+    return view('user.docteurIndex', compact('docteurs'));
+})->name('docteurs');
+
+Route::get('dashboard/docteur/create', function () {
+    return view('user.docteurCreate');
+})->name('docteurCreate');
+
+Route::post('dashboard/docteur/store', function (Request $request) {
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'telephone' => 'required',
+        'genre' => 'required'
+    ]);
+    $newPassword = 'aaaaaaaa';
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->genre = $request->genre;
+    $user->telephone = $request->telephone;
+    $user->matricule = uniqid();
+    $user->password = Hash::make($newPassword);
+    $user->is_docteur = true;
+    $user->save();
+    return redirect()->route('docteurs');
+})->name('docteurStore');
+
+Route::delete('dashboard/docteur/destroy/{user}', function (Request $request, User $user) {
+    try {
+        $user->delete();
+        return redirect()->route('user.index');
+    } catch (\Throwable $th) {
+        return redirect()->route('docteurs');
+    }
+})->name('docteurDestroy');
 
 Route::fallback(function () {
     return view('welcome');

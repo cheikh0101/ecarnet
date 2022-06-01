@@ -10,24 +10,62 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Tableau de Bord') }}
-                    </x-nav-link>
-                </div>
+                @if (auth()->user()->is_admin)
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Tableau de Bord') }}
+                        </x-nav-link>
+                    </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.user.index')" :active="request()->routeIs('dashboard.user.index')">
-                        {{ __('Mes patients') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('patients')" :active="request()->routeIs('patients')">
+                            {{ __('Patients') }}
+                        </x-nav-link>
+                    </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.rendezvous.index')" :active="request()->routeIs('dashboard.rendezvous.index')">
-                        {{ __('Mes Rendez-Vous') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('docteurs')" :active="request()->routeIs('docteurs')">
+                            {{ __('Docteurs') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.rendezvous.index')" :active="request()->routeIs('dashboard.rendezvous.index')">
+                            {{ __('Rendez-Vous') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+
+                @if (auth()->user()->is_patient)
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.rendezvous.create')" :active="request()->routeIs('dashboard.rendezvous.index')">
+                            {{ __('Creer unRendez-Vous') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+
+                @if (auth()->user()->is_docteur)
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Tableau de Bord') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('patients')" :active="request()->routeIs('patients')">
+                            {{ __('Patients') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard.rendezvous.index')" :active="request()->routeIs('dashboard.rendezvous.index')">
+                            {{ __('Rendez-Vous') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+
             </div>
 
             <!-- Settings Dropdown -->

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('genre')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_patient')->default(false);
+            $table->boolean('is_docteur')->default(false);
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
