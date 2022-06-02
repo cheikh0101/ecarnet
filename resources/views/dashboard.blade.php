@@ -28,7 +28,7 @@
 
             <div class="col d-flex justify-content-center">
                 <div class="card text-success border-success mb-3" style="max-width: 18rem;">
-                    <div class="card-header text-center">Nombre de rendez-vous</div>
+                    <div class="card-header text-center">Rendez - vous</div>
                     <div class="card-body">
                         <p class="card-text text-center fs-1">
                             {{ count($rendezVous) }}
