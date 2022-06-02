@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DossierStoreRequest;
 use App\Http\Requests\DossierUpdateRequest;
 use App\Models\Dossier;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DossierController extends Controller
@@ -33,13 +34,23 @@ class DossierController extends Controller
      * @param \App\Http\Requests\DossierStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DossierStoreRequest $request)
+    public function store(Request $request)
     {
-        $dossier = Dossier::create($request->validated());
+        $dossier = new Dossier();
+        $dossier->numero = uniqid();
+        $dossier->datenaissance = $request->datenaissance;
+        $dossier->cni = $request->cni;
+        $dossier->antecedent_medicaux = $request->antecedent_medicaux;
+        $dossier->antecedent_chirugicaux = $request->antecedent_chirugicaux;
+        $dossier->antecedent_familiaux = $request->antecedent_familiaux;
+        $dossier->user_id = $request->user_id;
+        $dossier->save();
 
         $request->session()->flash('dossier.id', $dossier->id);
 
-        return redirect()->route('dossier.index');
+        return redirect()->route('patients');
+        //$user = User::where('id', $request->user_id)->first();
+        //return view('user.show', compact('user', 'dossier'));
     }
 
     /**

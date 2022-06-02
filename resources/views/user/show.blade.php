@@ -48,12 +48,12 @@
                                                         </h5>
                                                     </div>
                                                 </div>
-                                                <div class="row mt-5">
+                                                {{-- <div class="row mt-5">
                                                     <div class="col">
                                                         <a href="  " class="btn btn-warning">Modifier les informations
                                                             personnelles</a>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -126,18 +126,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3 ml-2">
+                                            {{-- <div class="row mb-3 ml-2">
                                                 <div class="col">
                                                     <a href="" class="btn btn-warning">Modifier le dossier</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    {{-- <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingThree">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThree" aria-expanded="false"
@@ -207,7 +207,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
