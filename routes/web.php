@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Requests\UserStoreRequest;
+use App\Mail\NewDocteurAccount;
 use App\Models\Consultation;
 use App\Models\Groupe;
 use App\Models\GroupeUser;
@@ -9,6 +10,7 @@ use App\Models\Rendezvous;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -92,6 +94,7 @@ Route::post('dashboard/docteur/store', function (Request $request) {
     $user->password = Hash::make($newPassword);
     $user->is_docteur = true;
     $user->save();
+    Mail::to($user->email)->send(new NewDocteurAccount($user));
     return redirect()->route('docteurs');
 })->name('docteurStore');
 

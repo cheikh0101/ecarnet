@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
+use App\Mail\NewPatientAccount;
 use App\Models\Consultation;
 use App\Models\Dossier;
 use App\Models\Groupe;
@@ -10,6 +11,7 @@ use App\Models\GroupeUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -55,6 +57,7 @@ class UserController extends Controller
         $user->password = Hash::make($newPassword);
         $user->is_patient = true;
         $user->save();
+        Mail::to($user->email)->send(new NewPatientAccount($user));
         $request->session()->flash('user.id', $user->id);
         return redirect()->route('patients');
     }
@@ -68,9 +71,9 @@ class UserController extends Controller
     {
         $dossier = Dossier::where('user_id', $user->id)->first();
         if (!$dossier) {
-            return view('dossier.create');
+            return view('dossier.create', compact('user'));
         }
-        $consultations = Consultation::where('dossier_id', $dossier->id)->get();
+        $consultations = Consultation::where('user_id', $user->id)->get();
 
         return view('user.show', compact('user', 'dossier', 'consultations'));
     }
